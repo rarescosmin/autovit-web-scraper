@@ -9,7 +9,12 @@ def getCars(carDivContent):
         if 'article' in str(item):
             car = {
                 'make': item.contents[3].contents[1].contents[1].text.strip().split()[0],
-                'model': item.contents[3].contents[1].contents[1].text.strip().split()[1]
+                'model': item.contents[3].contents[1].contents[1].text.strip().split()[1],
+                'year': item.contents[3].contents[3].contents[1].text.strip(),
+                'mileage': item.contents[3].contents[3].contents[3].text.strip(),
+                'fuelType': item.contents[3].contents[3].contents[5].text.strip(),
+                'engineCapacity': item.contents[3].contents[3].contents[7].text.strip(),
+                'price': item.contents[3].contents[5].text.strip()
             }
             cars.append(car)
     return cars
