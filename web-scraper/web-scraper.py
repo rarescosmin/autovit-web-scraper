@@ -45,9 +45,8 @@ def writeCarsToCSV(carDivContent, shouldWriteCSVheader):
 if __name__ == '__main__':
 
     for i in range(1, 500):
-        #print('scraping...')
-
         response = requests.get(AUTOVIT_URL.format(i))
+        
         if response.status_code == 200:
             html = response.text
             soup = BeautifulSoup(html, 'html.parser')
