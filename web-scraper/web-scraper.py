@@ -13,10 +13,12 @@ def parseCarModel(carModel):
         return carModel[1] + ' ' + carModel[2]
     return carModel[1]
 
+
 def checkIfCarItemIsNull(carItem):
     if (carItem == None):
         return ''
     return carItem
+
 
 def writeCarsToCSV(carDivContent, shouldWriteCSVheader):
      with open('cars.csv', 'a', newline='') as csvfile:
@@ -42,6 +44,7 @@ def writeCarsToCSV(carDivContent, shouldWriteCSVheader):
             except Exception:
                 print('not inserted')
 
+    
 if __name__ == '__main__':
 
     for i in range(1, 500):
