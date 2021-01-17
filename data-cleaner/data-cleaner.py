@@ -6,6 +6,9 @@ import string
 def removeAllSpaces(word):
     return word.translate({ord(c): None for c in string.whitespace})
 
+def lowerCaseWord(word):
+    return str(word).lower()
+
 
 
 def sanitizeCsvData(rawDatFileName, outPutFileName):
@@ -18,6 +21,10 @@ def sanitizeCsvData(rawDatFileName, outPutFileName):
             for row in csv_reader:
                 for key in row:
                     row[key] = removeAllSpaces(row[key])
+                
+                row['make'] = lowerCaseWord(row['make'])
+                row['model'] = lowerCaseWord(row['model'])
+                row['fuelType'] = lowerCaseWord(row['fuelType'])
 
                 if ('km' or 'KM' or 'kM' or 'Km' in row['mileage']):
                     row['mileage'] = row['mileage'][:-2]
