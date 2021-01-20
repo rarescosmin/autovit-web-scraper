@@ -9,14 +9,30 @@ def removeAllSpaces(word):
 def lowerCaseWord(word):
     return str(word).lower()
 
+def getCylinders(engineCapacity):
+    if engineCapacity == None or engineCapacity == '': return ''
 
+    if int(engineCapacity) <= 1000: 
+        return 3
+
+    if int(engineCapacity) > 1000 and int(engineCapacity) <= 2999: 
+        return 4
+
+    if int(engineCapacity) > 2999 and int(engineCapacity) <= 3600: 
+        return 6
+
+    if int(engineCapacity) > 3600 and int(engineCapacity) <= 6000: 
+        return 8
+
+    if int(engineCapacity) > 6000: 
+        return 10
 
 def sanitizeCsvData(rawDatFileName, outPutFileName):
     with open(rawDatFileName, 'r') as read_obj:
         csv_reader = DictReader(read_obj)
 
         with open(outPutFileName, 'a', newline='') as writer_obj:
-            csv_writer = csv.DictWriter(writer_obj, fieldnames=['make', 'model', 'year', 'mileage', 'fuelType', 'engineCapacity', 'price'])
+            csv_writer = csv.DictWriter(writer_obj, fieldnames=['make', 'model', 'year', 'mileage', 'fuelType', 'engineCapacity', 'cylinders', 'price'])
             csv_writer.writeheader()
             for row in csv_reader:
                 for key in row:
@@ -31,6 +47,8 @@ def sanitizeCsvData(rawDatFileName, outPutFileName):
 
                 if ('cm' or 'CM' or 'cM' or 'Cm' in row['engineCapacity']):
                     row['engineCapacity'] = row['engineCapacity'][:-3]
+                
+                row['cylinders'] = getCylinders(row['engineCapacity'])
                 
                 if (',' in row['price']):
                     row['price'] = row['price'][:len(row['price']) - row['price'].index(',') + 2]
